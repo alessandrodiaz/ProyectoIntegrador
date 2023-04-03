@@ -33,7 +33,7 @@ export default function Experience() {
   return (
     <>
       <Perf position="top-left" />
-      <OrbitControls makeDefault />
+      <OrbitControls makeDefault minDistance={15} maxDistance={30} />
 
       {/* <ambientLight intensity={0.5} /> */}
 
@@ -57,6 +57,7 @@ export default function Experience() {
         position={[1, 2, -1]}
         intensity={6}
         castShadow={true}
+        shadowMap
       />
 
       {/* <rectAreaLight
