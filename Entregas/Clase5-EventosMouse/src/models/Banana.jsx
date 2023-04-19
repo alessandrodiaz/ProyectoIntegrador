@@ -50,6 +50,7 @@ export default function Banana(props) {
         material={materials.Material}
         position={[-4.65, 2.46, 0]}
         rotation={[0, 0, -0.68]}
+        castShadow={true}
       />
     </group>
   );

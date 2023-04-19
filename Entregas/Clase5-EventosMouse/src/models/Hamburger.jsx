@@ -6,22 +6,20 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function Hamburger(props) {
-    
-    const hamburgerRef = useRef(null)
-    const hamburger = useGLTF("/static/hamburger.glb");
-    return (
-        <primitive 
-            object={hamburger.scene}
-            ref={hamburgerRef}
-            {...props} 
-            dispose={null} 
-            onClick={(e)=>{
-                console.log("click")
-                console.log(e.object.name)
-            }}
-        />
-        
-    );
+  const hamburgerRef = useRef(null);
+  const hamburger = useGLTF("/static/hamburger.glb");
+  return (
+    <primitive
+      object={hamburger.scene}
+      ref={hamburgerRef}
+      {...props}
+      dispose={null}
+      onClick={(e) => {
+        console.log("click");
+        console.log(e.object.name);
+      }}
+    />
+  );
 }
 
 useGLTF.preload("/static/hamburger.glb");

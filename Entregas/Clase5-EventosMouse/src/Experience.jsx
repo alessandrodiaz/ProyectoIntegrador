@@ -7,27 +7,27 @@ import Banana from "./models/Banana";
 import Floor from "./Floor";
 import { Hamburger } from "./models/Hamburger";
 import Lemon from "./models/Lemon";
-import { PointLightHelper } from "three";
+import { DoubleSide, SpotLightHelper } from "three";
 
 export default function Experience() {
   // Luces
-  const pointLightRef = useRef();
-  useHelper(pointLightRef, PointLightHelper, 0.5);
+  const spotLightRef = useRef();
+  useHelper(spotLightRef, SpotLightHelper, 1);
 
   // Imagen
   // const paredRef = useRef();
 
-  const [clicked, setClicked] = useState(false);
-
-  const PATH = "/imagen.jpg";
+  const [active, setActive] = useState(false);
+  const [showSecondImage, setShowSecondImage] = useState(false);
+  const PATH = showSecondImage ? "/imagen2.jpg" : "/imagen.jpg";
 
   const props = useTexture({
     map: PATH,
   });
 
-  useFrame((state, delta) => {
-    // paredRef.current.rotation.z += 1 * delta;
-  });
+  const handleImageClick = () => {
+    setShowSecondImage((prev) => !prev);
+  };
 
   return (
     <>
@@ -35,36 +35,37 @@ export default function Experience() {
       <OrbitControls makeDefault />
       {/* <directionalLight position={[1, 2, 3]} intensity={1.5} /> */}
       {/* <ambientLight intensity={0.5} /> */}
-      <pointLight
-        ref={pointLightRef}
-        position={[-3, 4, 2]}
-        intensity={4}
-        color={"white"}
+      <spotLight
+        ref={spotLightRef}
+        position={[4, 4, 0]}
+        intensity={20}
+        distance={20}
+        decay={3}
+        color="lightyellow"
         castShadow={true}
         shadowMap
       />
 
       {/* Pared de la imagen */}
 
-      <mesh position={[0, 0, -5]} rotation={[0, 0, 0]}>
+      <mesh
+        onContextMenu={handleImageClick}
+        position={[0, 0, -5]}
+        rotation={[0, 0, 0]}
+      >
         <boxGeometry args={[10, 5, 0.1]} />
-        <meshBasicMaterial color={0xffffff} />
+        <meshStandardMaterial {...props} side={DoubleSide} />
       </mesh>
 
       {/* Pared video */}
 
       <mesh position={[0, 0, 5]} rotation={[0, Math.PI, 0]}>
         <boxGeometry args={[10, 5, 0.1]} />
-        <meshBasicMaterial color={0xffffff} />
+        <meshStandardMaterial color={0xffffff} />
       </mesh>
 
       <Banana position={[3, -0.5, 3]} scale={0.3} />
-      <Lemon
-        castShadow={true}
-        receiveShadow={true}
-        position={[-3, -2, 3]}
-        scale={0.3}
-      />
+      <Lemon position={[-3, -2, 3]} scale={0.3} />
       <Hamburger position={[-1, -2, -2]} scale={0.3} />
       <Floor />
     </>

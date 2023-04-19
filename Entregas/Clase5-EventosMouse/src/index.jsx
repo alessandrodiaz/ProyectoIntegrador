@@ -15,7 +15,7 @@ const cameraSettings = {
 };
 root.render(
   <StrictMode>
-    <Canvas camera={cameraSettings} castShadow={true}>
+    <Canvas camera={cameraSettings} shadows={true}>
       <Suspense>
         <Experience />
       </Suspense>

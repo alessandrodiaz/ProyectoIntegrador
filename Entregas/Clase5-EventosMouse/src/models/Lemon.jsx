@@ -6,21 +6,26 @@ import React, { useRef } from "react";
 import { meshBounds, useGLTF } from "@react-three/drei";
 
 export default function Lemon(props) {
-  const lemonRef = useRef(null)
+  const lemonRef = useRef(null);
   const { nodes } = useGLTF("/static/lemon.glb");
   return (
-    <group ref={lemonRef} {...props} dispose={null} onClick={(e) => {
-      e.stopPropagation();
-
-    }}>
+    <group
+      ref={lemonRef}
+      {...props}
+      dispose={null}
+      onClick={(e) => {
+        e.stopPropagation();
+      }}
+    >
       <mesh
         raycast={meshBounds}
+        castShadow={true}
+        receiveShadow={true}
         geometry={nodes.mesh_0.geometry}
         material={nodes.mesh_0.material}
         onClick={(e) => {
-          console.log("click en limon")
+          console.log("click en limon");
         }}
-
       />
     </group>
   );
