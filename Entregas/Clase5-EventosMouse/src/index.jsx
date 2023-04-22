@@ -8,10 +8,10 @@ import { Suspense } from "react";
 const root = ReactDOM.createRoot(document.querySelector("#root"));
 
 const cameraSettings = {
-  fov: 45,
+  fov: 95,
   near: 0.1,
   far: 200,
-  position: [-2, 1, 4],
+  position: [5, 1, 0],
 };
 root.render(
   <StrictMode>
